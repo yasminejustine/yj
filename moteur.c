@@ -27,7 +27,6 @@ void creerZone(int t[TAILLE_X][TAILLE_Y]){
 
 void monstre (int t[TAILLE_X][TAILLE_Y], int x, int y){
 	int monstre=2;
-	srand(time(NULL));
 	int n = (rand()%3);
 
 	if (n==0 && x<30 && y<20){
@@ -54,7 +53,7 @@ void monstre (int t[TAILLE_X][TAILLE_Y], int x, int y){
 }
 
 
-void affichage(int tab[TAILLE_X][TAILLE_Y]){
+void affichage(int tab[TAILLE_X][TAILLE_Y], n){
 	int i=0;
 	int j=0;
 	for(i=0;i<TAILLE_X;i++){
@@ -81,19 +80,18 @@ int main () {
 	int x,y = 2;		//Le monstre se situe 
 	int compteur = 0;
 
+	srand(time(NULL));
 	creerZone(t);	//Initialisation de la zone
-
 
 	while(jeu_fini == 0){
 		printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-		affichage(t[TAILLE_X][TAILLE_Y]);	//affichage de la zone
+		affichage(t);	//affichage de la zone
 		monstre(t[TAILLE_X][TAILLE_Y],x,y);	//Déplacement du monstre
 
 		for (i=0;i<TAILLE_X;i++){		//recherche de la nouvelle position du monstre
 			for(j=0;j<TAILLE_Y;j++){
 				if(t[i][j]==2){
-					x=i;
-					y=j;
+					monstre(t,i,j);
 				}
 			}
 		}
